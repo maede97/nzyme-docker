@@ -11,6 +11,7 @@ services:
         - POSTGRES_USER=${POSTGRES_USER}
         - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
         - POSTGRES_DATABASE=${POSTGRES_DATABASE}
+        - NZYME_PASSWORD=${NZYME_PASSWORD}
     depends_on:
       - postgres
     network_mode: host

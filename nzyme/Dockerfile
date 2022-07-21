@@ -33,6 +33,7 @@ ARG WIFI_CHANNELS
 ARG POSTGRES_DATABASE
 ARG POSTGRES_USER
 ARG POSTGRES_PASSWORD
+ARG NZYME_PASSWORD
 RUN sed -i "s/GRAYLOG_SERVER/${GRAYLOG_SERVER}/g" nzyme.conf
 RUN sed -i "s/GRAYLOG_GELF_TCP_PORT/${GRAYLOG_GELF_TCP_PORT}/g" nzyme.conf
 RUN sed -i "s/WIFI_INTERFACE/${WIFI_INTERFACE}/g" nzyme.conf
@@ -40,6 +41,7 @@ RUN sed -i "s/WIFI_CHANNELS/${WIFI_CHANNELS}/g" nzyme.conf
 RUN sed -i "s/POSTGRES_DATABASE/${POSTGRES_DATABASE}/g" nzyme.conf
 RUN sed -i "s/POSTGRES_USER/${POSTGRES_USER}/g" nzyme.conf
 RUN sed -i "s/POSTGRES_PASSWORD/${POSTGRES_PASSWORD}/g" nzyme.conf
+RUN sed -i "s/NZYME_PASSWORD/$(echo -n ${NZYME_PASSWORD} | sha256sum | awk '{print $1}')/g" nzyme.conf
 
 
 # expose the web interface
