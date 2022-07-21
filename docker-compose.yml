@@ -8,6 +8,9 @@ services:
         - GRAYLOG_GELF_TCP_PORT=${GRAYLOG_GELF_TCP_PORT}
         - WIFI_INTERFACE=${WIFI_INTERFACE}
         - WIFI_CHANNELS=${WIFI_CHANNELS}
+        - POSTGRES_USER=${POSTGRES_USER}
+        - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+        - POSTGRES_DATABASE=${POSTGRES_DATABASE}
     depends_on:
       - postgres
     network_mode: host
@@ -22,6 +25,6 @@ services:
     ports:
       - "5432:5432"
     environment:
-      - POSTGRES_USER=nzyme
-      - POSTGRES_PASSWORD=nzyme # TODO change me.
-      - POSTGRES_DB=nzyme
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DATABASE}
