@@ -1,0 +1,27 @@
+version: "3.7"
+services:
+  nzyme:
+    build: 
+      context: nzyme
+      args:
+        - GRAYLOG_SERVER=${GRAYLOG_SERVER}
+        - GRAYLOG_GELF_TCP_PORT=${GRAYLOG_GELF_TCP_PORT}
+        - WIFI_INTERFACE=${WIFI_INTERFACE}
+        - WIFI_CHANNELS=${WIFI_CHANNELS}
+    depends_on:
+      - postgres
+    network_mode: host
+    privileged: true # for allowing channel hopping / setting monitor mode from nzyme
+    ports:
+      - "22900:22900"
+
+  postgres:
+    image: postgres:14.4
+    restart: always
+    network_mode: host
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=nzyme
+      - POSTGRES_PASSWORD=nzyme # TODO change me.
+      - POSTGRES_DB=nzyme
